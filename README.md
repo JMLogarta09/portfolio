@@ -1,42 +1,141 @@
-# Portfolio Blog Starter
+# Portfolio Website
 
-This is a porfolio site template complete with a blog. Includes:
+A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS.
 
-- MDX and Markdown support
-- Optimized for SEO (sitemap, robots, JSON-LD schema)
-- RSS Feed
-- Dynamic OG images
-- Syntax highlighting
-- Tailwind v4
-- Vercel Speed Insights / Web Analytics
-- Geist font
+## Features
 
-## Demo
+- 🎨 Modern and beautiful UI design
+- 📱 Fully responsive layout
+- ⚡ Fast performance with Vite
+- 🎯 Smooth scrolling navigation
+- 💼 Project showcase section
+- 🛠️ Skills and technologies display
+- 📧 Contact form
+- 🌙 Clean and professional design
 
-https://portfolio-blog-starter.vercel.app
+## Tech Stack
 
-## How to Use
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **React Icons** - Icon library
 
-You can choose from one of the following two methods to use this repository:
+## Getting Started
 
-### One-Click Deploy
+### Prerequisites
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+- Node.js (v16 or higher)
+- npm, yarn, or pnpm
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/solutions/blog&project-name=blog&repository-name=blog)
+### Installation
 
-### Clone and Deploy
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
+1. Clone the repository or navigate to the project directory
+2. Install dependencies:
 
 ```bash
-pnpm create next-app --example https://github.com/vercel/examples/tree/main/solutions/blog blog
+npm install
+# or
+yarn install
+# or
+pnpm install
 ```
 
-Then, run Next.js in development mode:
+3. Start the development server:
 
 ```bash
+npm run dev
+# or
+yarn dev
+# or
 pnpm dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/templates) ([Documentation](https://nextjs.org/docs/app/building-your-application/deploying)).
+4. Open your browser and visit `http://localhost:5173`
+
+### Build for Production
+
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
+```
+
+The built files will be in the `dist` directory.
+
+### Preview Production Build
+
+```bash
+npm run preview
+# or
+yarn preview
+# or
+pnpm preview
+```
+
+## Customization
+
+### Update Personal Information
+
+1. **Hero Section** (`src/components/Hero.tsx`):
+   - Update name, title, and description
+   - Update social media links
+
+2. **About Section** (`src/components/About.tsx`):
+   - Update the about text and personal information
+
+3. **Skills Section** (`src/components/Skills.tsx`):
+   - Add or remove skills
+   - Update skill categories
+
+4. **Projects Section** (`src/components/Projects.tsx`):
+   - Replace with your own projects
+   - Update project descriptions, links, and technologies
+
+5. **Contact Section** (`src/components/Contact.tsx`):
+   - Update contact information (email, phone, location)
+   - Connect the form to your backend/email service
+
+6. **Footer** (`src/components/Footer.tsx`):
+   - Update social media links
+   - Update copyright information
+
+### Styling
+
+The project uses Tailwind CSS. You can customize colors, fonts, and other design elements in:
+- `tailwind.config.js` - Tailwind configuration
+- `src/index.css` - Global styles and custom utilities
+
+## Project Structure
+
+```
+portfolio-website/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── About.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Projects.tsx
+│   │   └── Skills.tsx
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── vite.config.ts
+```
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Contact
+
+For questions or suggestions, feel free to reach out!
