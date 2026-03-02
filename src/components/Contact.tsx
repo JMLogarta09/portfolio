@@ -34,7 +34,7 @@ const Contact = () => {
           from_email: formData.email,
           message: formData.message,
         },
-        'YOUR_PUBLIC_KEY'       // replace this
+        'Gm0tnQFTzXmVtnOyE'       // replace this
       )
 
       alert('Message sent successfully!')
