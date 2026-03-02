@@ -1,5 +1,13 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+import emailjs from '@emailjs/browser'
+
+await emailjs.send(
+  import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  {...},
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+)
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +15,8 @@ const Contact = () => {
     email: '',
     message: '',
   })
+
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -17,12 +27,30 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! I will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+    setLoading(true)
+
+    try {
+      await emailjs.send(
+        'YOUR_SERVICE_ID',      // replace this
+        'template_ebf3akf',     // replace this
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        'YOUR_PUBLIC_KEY'       // replace this
+      )
+
+      alert('Message sent successfully!')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      alert('Failed to send message. Please try again.')
+    }
+
+    setLoading(false)
   }
 
   return (
@@ -30,15 +58,17 @@ const Contact = () => {
       <h2 className="section-title">Get In Touch</h2>
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12">
+          
+          {/* LEFT SIDE */}
           <div>
             <h3 className="text-2xl font-bold mb-6 text-gray-900">
               Let's Connect
             </h3>
             <p className="text-gray-600 mb-8 leading-relaxed">
               I'm always open to discussing new projects, creative ideas, or
-              opportunities to be part of your visions. Feel free to reach out
-              through any of the channels below.
+              opportunities to be part of your visions.
             </p>
+
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary-100 rounded-lg">
@@ -54,6 +84,7 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
+
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary-100 rounded-lg">
                   <FaPhone className="text-primary-600 text-xl" />
@@ -68,6 +99,7 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
+
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary-100 rounded-lg">
                   <FaMapMarkerAlt className="text-primary-600 text-xl" />
@@ -80,70 +112,51 @@ const Contact = () => {
             </div>
           </div>
 
+          {/* FORM */}
           <form onSubmit={handleSubmit} className="card">
             <div className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-                  placeholder="Your Name"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition resize-none"
-                  placeholder="Your message..."
-                />
-              </div>
+              
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder="Your Name"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              />
+
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="your.email@example.com"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              />
+
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={6}
+                placeholder="Your message..."
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+              />
+
               <button
                 type="submit"
+                disabled={loading}
                 className="btn-primary w-full"
               >
-                Send Message
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
+
             </div>
           </form>
+
         </div>
       </div>
     </section>
